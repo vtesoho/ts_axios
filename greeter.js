@@ -1,13 +1,8 @@
-var User = /** @class */ (function () {
-    function User(firstName, lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.fullName = firstName + ' ' + lastName;
-    }
-    return User;
-}());
-function greeter(person) {
-    return 'hello ' + person.firstName + ' ' + person.lastName;
-}
-var user = new User('vte', 'so');
-console.log(greeter(user));
+// //枚举
+// enum Color{
+//   Red = 1,
+//   Green = 3,
+//   Blue = 4,
+// }
+create(o, { prop: 0 });
+create(o, null);
