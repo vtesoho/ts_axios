@@ -154,6 +154,154 @@
 // myArray[1] = 'c'    //会报错
 
 
+//类类型
+
+//实例部分
+// interface ClockInterface {
+//   currentTime: Date
+//   setTime(d:Date)
+// }
+
+// //静态部分 构造器接口
+// interface ClockConstructor {
+//   new(hour:number,minute:number)
+// }
+
+// //类里面必须要有接口里面定义的属性和方法
+// class Clock implements ClockConstructor{
+//   currentTime: Date
+
+//   constructor(hour: number, minute: number){
+
+//   }
+
+//   setTime(d:Date){
+//     this.currentTime = d
+//   }
+// }
+
+// interface ClockInterface {
+//   tick()
+// }
+
+// //静态部分 构造器接口
+// interface ClockConstructor {
+//   new(hour:number,minute:number): ClockInterface
+// }
+
+// function createClock(ctor:ClockConstructor,hour:number,minute:number): ClockInterface{
+//   return new ctor(hour,minute)
+// }
+
+// class DigitalClock implements ClockInterface {
+//   constructor(h:number,m:number){
+
+//   }
+//   tick(){
+//     console.log('beep beep')
+//   }
+// }
+
+// class AnalogClock implements ClockInterface{
+//   constructor(h:number,m:number){
+
+//   }
+//   tick(){
+//     console.log('tick toc')
+//   }
+// }
+
+// let digital = createClock(DigitalClock,12,17)
+// let analog = createClock(AnalogClock,12,17)
+
+
+//接口继承
+// interface Shape {
+//   color: string
+// }
+
+// interface PenStroke {
+//   penWidth: number
+// }
+
+// //一个接口可以继承多个接口
+// interface Square extends Shape, PenStroke{
+//   sildLength:number
+// }
+
+// let squre = {} as Square
+// squre.color = 'bule'
+// squre.sildLength = 10
+// squre.penWidth = 5.0
+
+//混合类型
+// interface Counter {
+//   (start: number): string,
+
+//   interval: number
+  
+//   reset(): void
+// }
+
+// function getCounter(): Counter {
+//   let counter = (function (star: number){
+
+//   }) as Counter
+  
+//   counter.interval = 123
+
+//   counter.reset = function (){
+    
+//   }
+
+//   return counter
+// }
+
+// let c = getCounter()
+// c(10)
+// c.reset()
+// c.interval = 5.0
+
+
+
+//接口继承类
+
+class Control {
+  private state: any
+}
+
+interface SelectableControl extends Control {
+  select()
+}
+
+//接口继承类的时候，同时也会继承它的私有属性，只有是继承了父类，才会有私有成员属性，才能实现接口
+class Button extends Control implements SelectableControl {
+  select(){
+
+  }
+}
+
+class TextBox extends Control {
+  select(){
+
+  }
+}
+
+//
+class ImageC implements SelectableControl{
+  select()
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
