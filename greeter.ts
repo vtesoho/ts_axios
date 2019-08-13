@@ -1,296 +1,203 @@
-// interface LabeledValut {
-//   label: string
-// }
+// // 最基础的类Greeter，有三个成员变量
+// class Greeter {
+//   //属性 
+//   greeting:string
 
-// function printLabel(labelLedOjb: LabeledValut){
-//   console.log(labelLedOjb.label)
-// }
-
-// let myOjb = {size:10,label:'size 10 Object'}
-
-// // // 必须要有label属性，并且类型还要一致
-// // let myOjb = {size:10,label:1}
-// // let myOjb = {size:10}
-
-// printLabel(myOjb)
-
-
-
-// //可选属性
-// interface Square {
-//   color: string
-//   area: number
-// }
-
-// // ?表示可选属性
-// interface SquareConfig {
-//   color?: string
-//   width?: number
-// }
-
-// function createSquare(config: SquareConfig) : Square{
-//   let newSquare = {color: 'white', area: 100}
-//   if(config.color){
-//     newSquare.color = config.color
+//   //构造函数
+//   constructor(message:string){
+//     this.greeting = message
 //   }
-//   if(config.width) {
-//     newSquare.area = config.width * config.width
+//   //一个方法 
+//   greet(){
+//     return 'hello' + this.greeting
 //   }
-//   return newSquare
 // }
 
-// let mySquare = createSquare({color:'block'})
+
+// let greeting =  new Greeter('world')
+// greeting.greet()
 
 
+//类的继承
 
-//只读属性
-// interface Point {
-//   readonly x:number
-//   readonly y:number
-// }
-
-// let p1:Point = {x:10,y:20}
-// p1.x = 4  //会报错
-
-// let a: number[] = [1,2,3,4]
-// let ro:ReadonlyArray<number> = a
-// ro[0] = 12  //会报错
-
-
-
-
-// // 额外属性
-// interface Square {
-//   color: string
-//   area: number
-  
-// }
-
-// // ?表示可选属性
-// interface SquareConfig {
-//   color?: string
-//   width?: number
-//   [propName:string]:any   //表示可有其它任何类型的属性
-// }
-
-// function createSquare(config: SquareConfig) : Square{
-//   let newSquare = {color: 'white', area: 100}
-//   if(config.color){
-//     newSquare.color = config.color
+// class Animal {
+//   move(distance: number = 0) {
+//     console.log(`Animal moved ${distance}`)
 //   }
-//   if(config.width) {
-//     newSquare.area = config.width * config.width
-//   }
-//   return newSquare
-// }
-
-// let mySquare = createSquare({colosr:'block'})
-
-
-
-
-// //接口描述函数类型
-// interface SearchFunc {
-//   (source: string, subString: string): boolean
-// }
-
-// let mySearch: SearchFunc
-
-// mySearch = function(source:string,subString:string):boolean{
-//   let result = source.search(subString)
-//   return result > -1
-// }
-
-// //也可以使用简写
-// mySearch = function(src:string,sub:string):boolean{
-//   let result = src.search(sub)
-//   return result > -1
-// }
-
-// //也可以不写，让ts自动判断，但参数数量与返回值的类型要匹配上
-// mySearch = function(src,sub){
-//   let result = src.search(sub)
-//   return result > -1
-// }
-
-
-// 可索引类型
-// interface StringArray {
-//   [index: number]: string
-// }
-
-// let myArray: StringArray
-// myArray = ['Bob', 'Fred']
-// let myStr:string = myArray[0]
-
-// class Animal{
-//   name:string
 // }
 
 // class Dog extends Animal{
-//   breed: string
-// }
-
-// //数字索引必须是string索引的子类型，不然会报错
-// interface NotOkay{
-//   [x:number]: Dog
-//   [x:string]: Animal
-// }
-
-// interface NumberDictionary {
-//   [index: string]: number
-
-//   length: number
-//   name:string //会报错，因为定义了所有索引都返回一个number类型
-// }
-
-
-//设置只读可索引接口
-// interface ReadonlyStringArray {
-//   readonly [index:number]: string
-// }
-
-// let myArray:ReadonlyStringArray = ['a','b']
-// myArray[1] = 'c'    //会报错
-
-
-//类类型
-
-//实例部分
-// interface ClockInterface {
-//   currentTime: Date
-//   setTime(d:Date)
-// }
-
-// //静态部分 构造器接口
-// interface ClockConstructor {
-//   new(hour:number,minute:number)
-// }
-
-// //类里面必须要有接口里面定义的属性和方法
-// class Clock implements ClockConstructor{
-//   currentTime: Date
-
-//   constructor(hour: number, minute: number){
-
-//   }
-
-//   setTime(d:Date){
-//     this.currentTime = d
+//   bark(){
+//     console.log('Woof! Woof!')
 //   }
 // }
 
-// interface ClockInterface {
-//   tick()
-// }
+// const dog = new Dog()
+// dog.bark()
+// dog.move(10)
 
-// //静态部分 构造器接口
-// interface ClockConstructor {
-//   new(hour:number,minute:number): ClockInterface
-// }
 
-// function createClock(ctor:ClockConstructor,hour:number,minute:number): ClockInterface{
-//   return new ctor(hour,minute)
-// }
-
-// class DigitalClock implements ClockInterface {
-//   constructor(h:number,m:number){
-
+// //父类，也称超类可被多个子类继承，并且可以通过super调用超类的方法
+// // 按规定子类的构造器是一定要用super超类的属性的
+// class Animal {
+//   name: string
+//   constructor(name:string){
+//     this.name = name
 //   }
-//   tick(){
-//     console.log('beep beep')
+//   move(distance: number = 0) {
+//     console.log(`${this.name} moved ${distance}m`)
 //   }
 // }
 
-// class AnalogClock implements ClockInterface{
-//   constructor(h:number,m:number){
-
+// class Snake extends Animal {
+//   constructor(name: string) {
+//     super(name)
 //   }
-//   tick(){
-//     console.log('tick toc')
+//   move(distance:number=5){
+//     console.log(`Slithering...${this.name}`)
+//     super.move(distance)
 //   }
 // }
 
-// let digital = createClock(DigitalClock,12,17)
-// let analog = createClock(AnalogClock,12,17)
-
-
-//接口继承
-// interface Shape {
-//   color: string
+// class Horse extends Animal{
+//   constructor(name:string) {
+//     super(name)
+//   }
+//   move(distance:number = 45){
+//     console.log('Galloping...')
+//     super.move(distance)
+//   }
 // }
 
-// interface PenStroke {
-//   penWidth: number
+// let sam = new Snake('sammy')
+// let tom: Animal = new Horse('Tommy')
+// sam.move()
+// tom.move(34)
+
+
+// //类的公共，私有与受保护的
+// //如果不声明 ，一般属性，构造器，方法都是public
+// class Animal {
+//   private name: string
+//   constructor(name:string){
+//     this.name = name
+//   }
+//   move(distance:number = 0){
+//     console.log(`${this.name} moved ${distance}`)
+//   }
 // }
 
-// //一个接口可以继承多个接口
-// interface Square extends Shape, PenStroke{
-//   sildLength:number
+// // new Animal('cat').name  //是访问不到的
+
+// class Rhino extends Animal {
+//   constructor(){
+//     super('Rhino')
+//   }
 // }
 
-// let squre = {} as Square
-// squre.color = 'bule'
-// squre.sildLength = 10
-// squre.penWidth = 5.0
-
-//混合类型
-// interface Counter {
-//   (start: number): string,
-
-//   interval: number
-  
-//   reset(): void
+// class Employee{
+//   private name:string
+//   constructor(name:string) {
+//     this.name = name
+//   }
 // }
 
-// function getCounter(): Counter {
-//   let counter = (function (star: number){
+// let animal = new Animal('Goat')
+// let rhino = new Rhino()
+// let employee = new Employee('bob')
 
-//   }) as Counter
-  
-//   counter.interval = 123
+// animal = rhino
+// animal = employee  //会报错，因为Employee的属性与Animal的来源是不一样的
 
-//   counter.reset = function (){
-    
+
+// 受保护的只能在子类被访问
+// class Person {
+//   protected name:string
+//   protected constructor(name:string) {
+//     this.name = name
+//   }
+// }
+
+// class Employee extends Person {
+//   protected department: string
+
+//   constructor(name:string, department:string){
+//     super(name)
+//     this.department = department
 //   }
 
-//   return counter
+//   getElevatorPitch(){
+//     return `Hello, my name is ${this.name}, and i work in ${this.department}`
+//   }
 // }
 
-// let c = getCounter()
-// c(10)
-// c.reset()
-// c.interval = 5.0
+// let howard = new Employee('howard','sales')
+// let john = new Person('john') //因为构造函数受保护的，只能在派生类去访问
+
+// console.log(howard.getElevatorPitch())
+// console.log(howard.name)  //报错
+
+
+//readonly只读
+// class Person {
+//   readonly name:string
+//   constructor(name:string) {
+//     this.name = name
+//   }
+// }
+
+// let john = new Person('john')
+// john.name = 'sss' //报错，不能修改
+
+//第一种方式 
+// 这二种方式都没什么问题，但推荐用第一种，这种更直观一点
+// class Person {
+//   readonly name:string
+//   constructor(name:string) {
+//     this.name = name
+//   }
+// }
+
+// let john = new Person('john')
+
+// //第二种方式
+// class Person {
+//   constructor(readonly name:string) {
+//     this.name = name
+//   }
+// }
+
+// let john = new Person('john')
+// console.log(john.name)
+// john.name = 'sss'  //报错
 
 
 
-//接口继承类
 
-class Control {
-  private state: any
-}
 
-interface SelectableControl extends Control {
-  select()
-}
 
-//接口继承类的时候，同时也会继承它的私有属性，只有是继承了父类，才会有私有成员属性，才能实现接口
-class Button extends Control implements SelectableControl {
-  select(){
 
-  }
-}
 
-class TextBox extends Control {
-  select(){
 
-  }
-}
 
-//
-class ImageC implements SelectableControl{
-  select()
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
