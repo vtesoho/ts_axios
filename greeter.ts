@@ -171,8 +171,134 @@
 // console.log(john.name)
 // john.name = 'sss'  //报错
 
+// //存取器
+
+// let passcode = 'secret1 passcode'
+
+// class Employee{
+//   private _fullName:string
+//   get fullName(): string{
+//     return this._fullName
+//   }
+//   set fullName(newName:string){
+//     if(passcode && passcode === 'secret passcode'){
+//       this._fullName = newName
+//     }else{
+//       console.log('error:')
+//     }
+//   }
+// }
+
+// let employee = new Employee()
+// employee.fullName = 'Bob smith'
+// if(employee.fullName) {
+//   console.log(employee.fullName)
+// }
 
 
+// //静态属性
+// class Grid {
+//   static origiin = {x:0,y:0}
+
+//   scale:number
+
+//   constructor(scale:number) {
+//     this.scale = scale
+//   }
+
+//   claculateDistanceFromOrigin(point: {x:number;y:number}){
+//     let xDist = point.x - Grid.origiin.x
+//     let yDist = point.y - Grid.origiin.y
+//     return Math.sqrt(xDist*xDist + yDist * yDist) * this.scale
+//   }
+// }
+
+// let grid1 = new Grid(1.0)
+// let grid2 = new Grid(5.0)
+
+// console.log(grid1.claculateDistanceFromOrigin({x:3,y:4}))
+// console.log(grid2.claculateDistanceFromOrigin({x:3,y:4}))
+
+
+
+// //抽象类
+// // 一般是作为派生类的基类
+
+// // abstract class Animal {
+// //   abstract makeSound(): void
+// //   move(): void {
+// //     console.log('roamin the earth...')
+// //   }
+// // }
+
+// //如果在abstract里面没有定义的方法，就算在派生类中有实现，也还是不能使用，这是在使用抽象类为类型的时候
+// abstract class Department {
+//   name: string
+
+//   constructor(name:string){
+//     this.name  = name
+//   }
+
+//   printName():void {
+//     console.log('Department name' + this.name)
+//   }
+
+//   abstract printMeting():void
+
+// }
+
+// class AccountingDepartment extends Department{
+//   constructor(){
+//     super('Accounting ad Auditing')
+//   }
+
+//   printMeting():void{
+//     console.log('the Accounting Department meets each monday at 10am')
+//   }
+//   genterateReports():void{
+//     console.log('genterateReports reports')
+//   }
+// }
+
+
+// let department: Department
+
+// department = new AccountingDepartment()
+// department.printName()
+// department.printMeting()
+// // department.genterateReports()
+
+
+
+//类的高级技巧
+
+class Greeter {
+  static standardGreeting = 'hello, there'
+
+  greeting: string
+
+  constructor(message?: string){
+    this.greeting = message
+  }
+
+  greet(){
+    if(this.greeting){
+      return 'hello'+ this.greeting
+    }else{
+      return Greeter.standardGreeting
+    }
+  }
+}
+
+let greeter: Greeter
+greeter = new Greeter()
+console.log(greeter.greet())
+
+let greeterMaker: typeof Greeter = Greeter
+greeterMaker.standardGreeting = 'hey there'
+
+let greeter2: Greeter = new greeterMaker()
+console.log(greeter2.greet())
 
 
 
