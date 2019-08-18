@@ -1,181 +1,128 @@
-// //命明函数
-// function add(x,y){
-//   return x + y
-// }
-
-// //匿名函数
-// let myAdd = function (x,y) {
-//   return x + y
-// }
-
-// let z = 100
-// //使用外部变量
-// function addToZ(x,y) {
-//   return x + y + z
-// }
-
-// 参数声明
-// function add(x:number,y:number):number{
-//   return x + y
-// }
-
-// //完整的函数类型
-// let myAdd:(x:number,y:number)=> number = function (x:number,y:number):number {
-//   return x + y
-// }
-
-
-// //参数
-// function buildName(firstName:string,lastName:string):string{
-//   return firstName + ' ' + lastName
-// }
-
-// let result1 = buildName('bob')  //参数过少
-// let result2 = buildName('bob','bob','bob')  //参数过多
-// let result3 = buildName('bob','bob')
-
-
-// //可选参数?:  可选参数必须在后面
-// function buildName(firstName:string,lastName?:string):string{
-//   if(lastName){
-//     return firstName + ' ' + lastName
-//   }else{
-//     return firstName
-//   }
-  
-// }
-
-// let result1 = buildName('bob')  //不会报错了
-// // let result2 = buildName('bob','bob','bob')  //参数过多
-// let result3 = buildName('bob','bob')
-
-
-//默认初始化参数
-// function buildName(firstName:string,lastName = 'Smith'):string{
-//   return firstName + ' ' + lastName
-// }
-// let result1 = buildName('bob')  //不会报错了
-// // let result2 = buildName('bob','bob','bob')  //参数过多
-// let result3 = buildName('bob','bob')
-
-
-// //如果默认参数在前面，也必须要传二个参数，但是可以传undefined
-// function buildName(firstName= 'rirst',lastName:string):string{
-//   return firstName + ' ' + lastName
-// }
-// let result3 = buildName(undefined,'bob')
-
-// //剩余参数，个数不限
-// function buildName(firstName:string, ...restOfName:string[]):string{
-//   return firstName + ' ' + lastName
-// }
-
-// let buildNameFn: (fname:string, ...rest:string[]) => string = buildName
-
-// let result3 = buildName(undefined,'bob')
-// let result4 = buildName(undefined,'bob','aaa')
-// let result5 = buildName('bob','bbb','ccc','ddd')
-// let result6 = buildName(undefined,'bob')
-
-
-
-//显示this
-// interface Card {
-//   suit:string
-//   card:number
-// }
-
-// interface Deck {
-//   suits: string[]
-//   cards: number[]
-//   createCardPicker(this:Deck): () => Card
-// }
-
-
-// let deck: Deck = {
-//   suits: ['hearts','spades','clubs','diamonds'],
-//   cards: Array(52),
-//   createCardPicker: function (this:Deck){
-//     return () => {
-//       let pickedCard = Math.floor(Math.random() * 52)
-//       let PickedSuit = Math.floor(pickedCard / 13)
-//       return {
-//         suit: this.suits[PickedSuit],  //
-//         card: pickedCard % 13
-//       }
-//     }
-//   }
-// }
-
-// let cardPicker = deck.createCardPicker()
-// let pickedCard = cardPicker()
-
-// console.log('card ' + pickedCard.card+ ' of ' + pickedCard.suit)
-
-
-
-
-// interface UIElement {
-//   addClickListener(onClick:(this:void,e: Event) => void):void
-// }
-
-// class Handler {
-//   type: string
-//   onClickBad = (e: Event) => {
-//     this.type = e.type
-//   }
-// }
-
-// let h = new Handler()
-
-// let uiElement: UIElement = {
-//   addClickListener(){
-
-//   }
-// }
-
-// uiElement.addClickListener(h.onClickBad)
-
-
-//重载
-/*
-1.方法重载是指在同一个类中方法同名，参数不同，调用时根据实
-
-参的形式，选择与他匹配的方法执行操作的一种技术。
-
-①  参数的类型不同；
-②  参数的个数不同；
-③  参数的个数相同时他们的先后顺序不同；
-
-2.是否构成重载的条件：
-
-◆ 在同一个类中；
-◆ 方法名相同；
-◆ 参数列表不同；
-
-3.方法重载是多态的一种实现方式；
-
-在JS中本身不支持重载的，而在TS中使用可以"变通"的支持重载：
-
-1.先申明所有方法重载的定义，不包含方法的实现；
-
-2.再声明一个参数为any类型的重载方法；
-
-3.实现any类型的方法并通过参数类型（和返回类型）不同来实现重载；
-*/
-
-function add(a:number,b:number):number
-function add(a:string,b:string):string
-
-function add(a:any,b:any):any{
-  let result = null
-  if(typeof(a) == "number" && typeof(b) == "number"){
-    result = <number>a + <number>b
-  }else if(typeof(a) == "string" && typeof(b) == "string") {
-    result = <string>a + <string>b
-  }
-  return result;
+function identity<T>(arg:T):T{
+  return arg 
 }
+
+// let output = identity<string>('myString')
+
+//ts会自动帮我们推断类型
+let output = identity('myString')
+
+
+
+//泛型参数
+function loggingIdentity<T>(arg:T[]):T[]{
+  console.log(arg.length)
+  return arg
+}
+
+
+// let myIdentity: <T> (arg:T) => T = identity
+
+
+//泛型接口
+//比较推荐方式
+interface GnericIdentityFn<T> {
+  (arg:T): T
+}
+
+let myIdentity: GnericIdentityFn<number> = identity
+
+
+//泛型类
+class GenericNumber<T> {
+  zeroValue:T
+  add:(x:T,y:T) => T
+}
+
+let myGenericNumber = new GenericNumber<number> ()
+
+myGenericNumber.zeroValue = 0
+
+myGenericNumber.add = function (x,y) {
+  return x + y
+}
+
+let stringNumberic = new GenericNumber<string> ()
+
+stringNumberic.zeroValue = 'adfds'
+stringNumberic.add = function(x,y){
+  return x + y
+}
+
+console.log(stringNumberic.add(stringNumberic.zeroValue,'test'))
+
+
+
+
+
+
+//泛型约束
+interface Lengthwise{
+  length: number
+}
+//通过接口来约束T
+function loggingIdentitya<T extends Lengthwise>(arg:T) :T{
+  console.log(arg.length)
+  return arg
+}
+
+
+//这种方式，如果传入的类型不带有length这个属性，就会报错，相当于做了约束
+loggingIdentitya('sss')
+// loggingIdentitya(333)  //会报错。number没有length
+
+
+
+function getProperty<T,K extends keyof T>(obj:T,key: K) {
+  return obj[key]
+}
+
+let x = {a:1,b:2,c:3,d:4}
+
+getProperty(x,'a')
+// getProperty(x,'g')  //g不存在于x的key
+ 
+
+//一个泛型应用于工厂模式的例子
+function create<T>(c:{new(): T}):T{
+  return new c()
+}
+
+
+class Beekeeper{
+  hasMask: boolean
+}
+
+class LionKeeper{
+  nameTag: string
+}
+
+class Animal {
+  numLengs: number
+}
+
+class Bee extends Animal{
+  keeper: Beekeeper
+}
+
+class Lion extends Animal {
+  keeper: LionKeeper
+}
+
+function createInstance<T extends Animal>(c:new()=>T):T{
+  return new c()
+}
+
+//可以推导出来类型
+createInstance(Lion).keeper.nameTag
+createInstance(Bee).keeper.hasMask
+
+
+
+
+
+
+
 
 
 
