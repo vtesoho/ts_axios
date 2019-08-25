@@ -1,134 +1,84 @@
-// function padLeft(value:string, padding: any){
-//   if(typeof padding === 'number'){
-//     return Array(padding+1).join(' ') + value
+// let s = 'foo'
+// s = null
+// let sn: string | null = 'bar'
+// sn = null
+// sn = undefined
+
+
+// function f(x:number,y?:number){
+//   return x+(y|| 0)
+// }
+
+// f(1,2)
+// f(1)
+// f(1,undefined)
+// f(1,null)
+
+
+
+
+// class C{
+//   a:number
+//   b?:number
+// }
+// let c = new C()
+// c.a = 12
+// c.a = undefined  //报错
+// c.b = 13
+// c.b = undefined//可选参数默认会添加一个undefined的联合类型
+// c.b = null  //null是不能赋值给number或是undefined的
+
+
+// function f(sn:string|null):string{
+//   if(sn === null) {
+//     return 'default'
+//   }else {
+//     return sn
 //   }
-//   if(typeof padding === 'string') {
-//     return padding + value
+// }
+
+// function fa(sn:string|null):string{
+//   return sn! || 'default'
+// }
+
+
+// //可以用一个！号来断言他肯定不为null
+// function broken(name:string | null) : string{
+//   function postfix(epither: string) {
+//     return name!.charAt(0) + '. the' + epither
 //   }
-//   throw new Error(`Expected string or number got ${padding}`)
+//   name = name || 'Bob'
+//   return postfix(name)
+
 // }
 
-
-// padLeft('hello world', 4)
-
-
-// // 联合类型是几种类型之一，以|线分隔类型
-// function padLeftA(value:string, padding: string | number){
-//   if(typeof padding === 'number'){
-//     return Array(padding+1).join(' ') + value
-//   }
-//   if(typeof padding === 'string') {
-//     return padding + value
-//   }
-//   throw new Error(`Expected string or number got ${padding}`)
-// }
-
-
-// // padLeftA('hello world', true) //会报错 
-
-
-// interface Bird{
-//   fly()
-//   layEggs()
-// }
-
-// interface Fish {
-//   swim()
-//   layEggs()
-// }
-
-// function getSmallPet(): Fish | Bird {
-//   // ...
-// }
-
-// let pet = getSmallPet()
-// pet.layEggs()
-// pet.swim() // 会报错
-
-// if((pet as Fish).swim) {
-//   (pet as Fish).swim()
-// }else if((pet as Bird).fly){
-//   (pet as Bird).fly()
-// }
-
-//类型保护
-
-// if(isFish(pet)){
-//   pet.swim()
-// } else {
-//   pet.fly()
-// }
-
-// function isFish(pet: Fish | Bird): pet is Fish{
-//   return (pet as Fish).swim != undefined
-// }
-
-// function isNumber(x:any): x is number{
-//   return typeof x === 'number'
-// }
-
-// function isString(x:any): x is string{
-//   return typeof x === 'string'
-// }
-
-// function padLeft(value: string,padding:string | number){
-//   if(isNumber(padding)){
-//     return Array(padding+1).join(' ')+ value
-//   }
-//   if(isString(padding)){
-//     return padding + value
-//   }
-//   throw new Error(`Expected string or number , got ${padding}`)
-// }
-
-// //改进
-// function padLeftA(value: string,padding:string | number){
-//   if(typeof padding === 'number'){
-//     return Array(padding+1).join(' ')+ value
-//   }
-//   if(typeof padding === 'string'){
-//     return padding + value
-//   }
-//   throw new Error(`Expected string or number , got ${padding}`)
-// }
+// broken(null)
 
 
 
+//字符串字变量类型
 
-class Bird{
-  fly(){
-    console.log('bird fly')
-  }
-  layEggs(){
-    console.log('bird lay eggs')
+
+
+type Easing = 'ease-in' | 'ease-out' | 'ease-in-out'
+
+class UIElement{
+  animate(dx:number, dy:number, easing: Easing) {
+    if(easing === 'ease-in'){
+
+    }else if(easing === 'ease-out') {
+      
+    }else if(easing === 'ease-in-out'){
+
+    }else {
+
+    }
   }
 }
 
-class Fish {
-  swim(){
-    console.log('Fish swim')
-  }
-  layEggs(){
-    console.log('Fish lay eggs')
-  }
-}
-
-
-//另一种
-function getRandomPet(): Fish | Bird {
-  return Math.random()>0.5 ? new Bird(): new Fish()
-}
-
-let pet = getRandomPet()
-
-if(pet instanceof Bird){
-  pet.fly
-}
-
-if(pet instanceof Fish){
-  pet.swim
-}
-
+let button = new UIElement()
+button.animate(0,0,'ease-in')
+button.animate(0,0,'uneasy') //会报错
 
 
 
