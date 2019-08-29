@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "name": "typescript",
   "version": "0.0.0",
   "description": "",
@@ -11,19 +10,6 @@
     "dist"
   ],
   "author": "vtesoho <vtesoho@163.com>",
-=======
-  "name": "--libraryname--",
-  "version": "0.0.0",
-  "description": "",
-  "keywords": [],
-  "main": "dist/--libraryname--.umd.js",
-  "module": "dist/--libraryname--.es5.js",
-  "typings": "dist/types/--libraryname--.d.ts",
-  "files": [
-    "dist"
-  ],
-  "author": "--username-- <--usermail-->",
->>>>>>> 1cc176e32de6192a5601f7676f73604f0e3350bd
   "repository": {
     "type": "git",
     "url": ""
@@ -33,10 +19,7 @@
     "node": ">=6.0.0"
   },
   "scripts": {
-<<<<<<< HEAD
     "dev": "node examples/server.js",
-=======
->>>>>>> 1cc176e32de6192a5601f7676f73604f0e3350bd
     "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
     "prebuild": "rimraf dist",
     "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src",
@@ -50,10 +33,7 @@
     "semantic-release": "semantic-release",
     "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
     "precommit": "lint-staged",
-<<<<<<< HEAD
-=======
     "postinstall": "ts-node tools/init",
->>>>>>> 1cc176e32de6192a5601f7676f73604f0e3350bd
     "travis-deploy-once": "travis-deploy-once"
   },
   "lint-staged": {
@@ -137,7 +117,6 @@
     "tslint-config-prettier": "^1.15.0",
     "tslint-config-standard": "^8.0.1",
     "typedoc": "^0.12.0",
-<<<<<<< HEAD
     "typescript": "^3.0.3",
     "webpack": "^4.28.4",
     "webpack-dev-middleware": "^3.5.0",
@@ -146,8 +125,5 @@
     "tslint-loader": "^3.5.4",
     "express": "^4.16.4",
     "body-parser": "^1.18.3"
-=======
-    "typescript": "^3.0.3"
->>>>>>> 1cc176e32de6192a5601f7676f73604f0e3350bd
   }
 }
