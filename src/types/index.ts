@@ -13,3 +13,13 @@ export interface AxiosRequestConfig{
   params?: any
   headers?: any
 }
+
+export interface AxiosResponse{
+  data:any
+  status:number
+  statusText: string
+  headers:any
+  config: AxiosRequestConfig
+  request: any
+}
+
