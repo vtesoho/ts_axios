@@ -1,3 +1,4 @@
+import { AxiosRequestConfig } from './index';
 export type Method =  'get' | 'GET'
 | 'delete' | 'Delete'
 | 'head' | 'HEAD'
@@ -29,3 +30,11 @@ export interface AxiosPromise extends Promise<AxiosResponse>{
 
 }
 
+export interface AxiosError extends Error{
+  isAxiosError:boolean
+  config:AxiosRequestConfig
+  code?: string | null
+  request?: any
+  response?: any
+
+}
