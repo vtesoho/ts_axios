@@ -11,3 +11,11 @@ export function isDate(val: any): val is Date{
 export function isPlainObject(val:any):val is Object{
   return toString.call(val) === '[object Object]'
 }
+
+
+export function extend<T,U>(to:T,form:U): T & U{
+  for(const key in form){
+    ;(to as T & U)[key] = form[key] as any
+  }
+  return to as T & U
+}
